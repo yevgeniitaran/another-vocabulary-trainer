@@ -1,4 +1,4 @@
-package com.yevgent.avc;
+package com.yevgent.avt;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
