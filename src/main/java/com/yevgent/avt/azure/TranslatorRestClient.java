@@ -1,11 +1,13 @@
 package com.yevgent.avt.azure;
 
 import com.yevgent.avt.azure.dto.TranslatorRequestDto;
+import com.yevgent.avt.azure.dto.VocabularyTranslatorResponseDto;
 import com.yevgent.avt.config.ApplicationProperties;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.experimental.FieldDefaults;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.MediaType;
 import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.stereotype.Service;
@@ -33,7 +35,7 @@ public class TranslatorRestClient {
     private static final String API_VERSION = "3.0";
 
     @SneakyThrows
-    public Mono<String> translateByVocabulary(Language from, Language to, TranslatorRequestDto translatorRequestDto) {
+    public Mono<List<VocabularyTranslatorResponseDto>> translateByVocabulary(Language from, Language to, TranslatorRequestDto translatorRequestDto) {
         return webClient.post()
                 .uri(uriBuilder -> uriBuilder.scheme("https")
                         .host(applicationProperties.getAzureTranslatorEndpoint())
@@ -47,6 +49,7 @@ public class TranslatorRestClient {
                 .contentType(MediaType.APPLICATION_JSON)
                 .bodyValue(List.of(translatorRequestDto))
                 .retrieve()
-                .bodyToMono(String.class);
+                .bodyToMono(new ParameterizedTypeReference<>() {
+                });
     }
 }
