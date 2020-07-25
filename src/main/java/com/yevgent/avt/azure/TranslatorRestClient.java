@@ -31,7 +31,6 @@ public class TranslatorRestClient {
             .build();
 
     private static final String DICTIONARY_PATH = "/dictionary/lookup";
-    private static final String REGION = "westeurope";
     private static final String API_VERSION = "3.0";
 
     @SneakyThrows
@@ -45,7 +44,7 @@ public class TranslatorRestClient {
                         .queryParam("to", to.getAbbr())
                         .build())
                 .header("Ocp-Apim-Subscription-Key", applicationProperties.getAzureTranslatorKey())
-                .header("Ocp-Apim-Subscription-Region", REGION)
+                .header("Ocp-Apim-Subscription-Region", applicationProperties.getAzureTranslatorRegion())
                 .contentType(MediaType.APPLICATION_JSON)
                 .bodyValue(List.of(translatorRequestDto))
                 .retrieve()

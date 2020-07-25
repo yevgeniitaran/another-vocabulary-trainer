@@ -17,7 +17,22 @@ public class ApplicationProperties {
     private String azureTranslatorEndpoint;
 
     /**
+     * Azure Translator Region
+     */
+    private String azureTranslatorRegion;
+
+    /**
      * Azure Translator Key
      */
     private String azureTranslatorKey;
+
+    /**
+     * Azure Speech Service Region
+     */
+    private String azureSpeechRegion;
+
+    /**
+     * Azure Speech Service Key
+     */
+    private String azureSpeechKey;
 }
