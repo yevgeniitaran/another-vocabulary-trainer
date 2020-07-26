@@ -15,7 +15,7 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-public class TranslateRestController {
+public class TestRestController {
 
     TranslatorService translatorService;
     SpeechService speechService;
