@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 
-import java.util.List;
-
 @RestController
 @AllArgsConstructor
 public class TestRestController {
@@ -22,7 +20,7 @@ public class TestRestController {
 
     @GetMapping("/test")
     @SneakyThrows
-    public Mono<List<VocabularyTranslatorResponseDto>> test(@RequestParam(name = "word") String word) {
+    public Mono<VocabularyTranslatorResponseDto> test(@RequestParam(name = "word") String word) {
 
         return translatorService.translateByVocabulary(Language.RUSSIAN, Language.ENGLISH, word);
     }

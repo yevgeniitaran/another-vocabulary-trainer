@@ -8,8 +8,6 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
-import java.util.List;
-
 @Service
 @AllArgsConstructor
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
@@ -17,8 +15,9 @@ public class TranslatorService {
 
     TranslatorRestClient translatorRestClient;
 
-    public Mono<List<VocabularyTranslatorResponseDto>> translateByVocabulary(Language from, Language to, String word) {
+    public Mono<VocabularyTranslatorResponseDto> translateByVocabulary(Language from, Language to, String word) {
 
-        return translatorRestClient.translateByVocabulary(from, to, new TranslatorRequestDto(word));
+        return translatorRestClient.translateByVocabulary(from, to, new TranslatorRequestDto(word))
+                .map(response -> response.get(0));
     }
 }
