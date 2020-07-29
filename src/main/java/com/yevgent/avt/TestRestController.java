@@ -24,10 +24,4 @@ public class TestRestController {
 
         return translatorService.translateByVocabulary(Language.RUSSIAN, Language.ENGLISH, word);
     }
-
-    @GetMapping("/speech")
-    @SneakyThrows
-    public void testSpeech(@RequestParam(name = "text") String text) {
-        speechService.speechToAudio(text);
-    }
 }

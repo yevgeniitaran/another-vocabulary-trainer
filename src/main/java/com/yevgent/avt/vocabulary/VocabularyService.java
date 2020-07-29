@@ -3,20 +3,24 @@ package com.yevgent.avt.vocabulary;
 import com.yevgent.avt.azure.Language;
 import com.yevgent.avt.azure.TranslatorService;
 import com.yevgent.avt.azure.dto.VocabularyTranslatorResponseDto;
-import com.yevgent.avt.vocabulary.mongo.documents.VocabularyRecord;
-import com.yevgent.avt.vocabulary.mongo.repositories.VocabularyRecordCrudRepository;
+import com.yevgent.avt.sound.SoundService;
+import com.yevgent.avt.vocabulary.documents.VocabularyRecord;
+import com.yevgent.avt.vocabulary.repositories.VocabularyRecordCrudRepository;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
 @Service
 @AllArgsConstructor
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
+@Slf4j
 public class VocabularyService {
 
     TranslatorService translatorService;
+    SoundService soundService;
 
     VocabularyRecordCrudRepository vocabularyRecordCrudRepository;
 
@@ -44,6 +48,8 @@ public class VocabularyService {
                         break;
                     }
                 }
+                soundService.saveWordSound(fromLanguage, word).subscribe();
+
                 return vocabularyRecordCrudRepository.save(record);
             });
         }));

@@ -1,4 +1,4 @@
-package com.yevgent.avt.vocabulary.mongo.documents;
+package com.yevgent.avt.vocabulary.documents;
 
 import com.yevgent.avt.azure.Language;
 import lombok.Data;

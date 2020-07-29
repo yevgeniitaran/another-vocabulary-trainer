@@ -1,8 +1,9 @@
 package com.yevgent.avt.vocabulary;
 
 import com.yevgent.avt.azure.Language;
-import com.yevgent.avt.vocabulary.mongo.documents.VocabularyRecord;
+import com.yevgent.avt.vocabulary.documents.VocabularyRecord;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,6 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/vocabulary")
 @AllArgsConstructor
+@Slf4j
 public class VocabularyRestController {
 
     VocabularyService vocabularyService;
@@ -27,6 +29,7 @@ public class VocabularyRestController {
     Mono<VocabularyRecord> getTranslations(@RequestParam(name = "from") Language from,
                                            @RequestParam(name = "to") Language to,
                                            @RequestParam(name = "word") String word) {
+
         return vocabularyService.getWordTranslations(from, to, word);
     }
 }
