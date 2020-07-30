@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 
+import static org.springframework.http.MediaType.APPLICATION_OCTET_STREAM_VALUE;
+
 @RestController
 @RequestMapping("/api/v1/sounds")
 @AllArgsConstructor
@@ -16,9 +18,11 @@ public class SoundRestController {
 
     private final SoundService soundService;
 
-    @GetMapping
-    Mono<WordSound> getSound(@RequestParam(name = "language") Language language,
-                             @RequestParam(name = "word") String word) {
-        return soundService.getWordSound(language, word);
+    @GetMapping(produces = APPLICATION_OCTET_STREAM_VALUE)
+    Mono<byte[]> getSound(@RequestParam(name = "language") Language language,
+                          @RequestParam(name = "word") String word) {
+
+        return soundService.getWordSound(language, word)
+                .map(WordSound::getSound);
     }
 }
